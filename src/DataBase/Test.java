@@ -6,34 +6,27 @@ public class Test {
     public static void main(String[] args) {
         try {
             Class.forName(Config.nomDriver);
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println("Erreur Driver" + cnfe.getMessage());
         }
-        catch (ClassNotFoundException cnfe){
-            System.out.println("Erreur Driver"+cnfe.getMessage());
-        }
-        //Connection con=DataBaseConnection.makeConnection();
-        //requete insertion
-
-
-            String requet_sel= "select * from Etudiant";
-            try{
-                st = con.createStatement();
-                ResultSet res = st.executeQuery(requet_sel);
-                ResultSetMetaData rsmd=res.getMetaData();
-                int nbcol = rsmd.getColumnCount();
-                while(res.next()){
-                    for(int i=0;i<nbcol;i++){
-                        System.out.print(res.getObject(i+1)+" | ");
-                    }
-                    System.out.println();
-                }
-
-            }
-            catch (SQLException se){
-                System.out.println("Erreur de selection"+ se.getMessage());
-            }
-
-        }
+        EtudiantImplementation etu = new EtudiantImplementation();
+        // Insert a student
+        int x = etu.insertEtudiant(12345, "Salem", "karim", 10.83);
+        System.out.println("Rows inserted: " + x);
+        //List<Profile> Profiles = etu.selectEtudiant("SELECT * FROM Etudiant");
+        // Optional: Select students
+        ResultSet rs = etu.selectEtudiant("SELECT * FROM Etudiant");
+        etu.afficherResultSet(rs);
+        x = etu.modifyEudiant(12345, "loulou", "rougui", 18);
+        System.out.println("Rows updated: " + x);
+        rs = etu.selectEtudiant("SELECT * FROM Etudiant");
+        etu.afficherResultSet(rs);
+        x = etu.deleteEudiant(12345);
+        rs = etu.selectEtudiant("SELECT * FROM Etudiant");
+        etu.afficherResultSet(rs);
 
 
     }
+
+
 }

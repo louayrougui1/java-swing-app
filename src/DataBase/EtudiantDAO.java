@@ -1,11 +1,15 @@
 package DataBase;
 
+import Model.Profile;
+
 import java.sql.ResultSet;
+import java.util.List;
 
 public interface EtudiantDAO {
-    int insertEudiant(int cin,String nom, String prenom,double moyenne);
+    int insertEtudiant(int cin,String nom, String prenom,double moyenne);
+    ResultSet selectEtudiant(String requeteSelection);
+
     int deleteEudiant(int cin);
     int modifyEudiant(int cin,String nom, String prenom,double moyenne);
-    ResultSet selectEudiant(String requeteSelection);
     void afficherResultSet(ResultSet rs);
 }
