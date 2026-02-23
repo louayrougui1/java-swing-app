@@ -21,8 +21,8 @@ public class Test {
         System.out.println("Rows updated: " + x);
         rs = etu.selectEtudiant("SELECT * FROM Etudiant");
         etu.afficherResultSet(rs);
-        x = etu.deleteEudiant(12345);
-        rs = etu.selectEtudiant("SELECT * FROM Etudiant");
+        /*x = etu.deleteEudiant(12345);
+        rs = etu.selectEtudiant("SELECT * FROM Etudiant");*/
         etu.afficherResultSet(rs);
 
 

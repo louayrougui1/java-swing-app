@@ -5,13 +5,13 @@ import java.sql.*;
 public class EtudiantImplementation implements EtudiantDAO {
     Connection con;
 
-    EtudiantImplementation() {
+    public EtudiantImplementation() {
         con = DataBaseConnection.makeConnection();
     }
 
     @Override
     public int insertEtudiant(int cin, String nom, String prenom, double moyenne) {
-        String requete_insertion = "insert into Etudiant values (12345,'Salem','karim',10.83)";
+        String requete_insertion = "insert into Etudiant values ("+cin+",'"+nom+"','"+prenom+"',"+moyenne+")";
         Statement st = null;
         if (con != null) {
             try {
@@ -22,7 +22,7 @@ public class EtudiantImplementation implements EtudiantDAO {
                 }
                 return a;
             } catch (SQLException se) {
-                System.out.println("Erreur dinsertion" + se.getMessage());
+                System.out.println("Erreur d'insertion: " + se.getMessage());
 
             }
         }
@@ -44,10 +44,10 @@ public class EtudiantImplementation implements EtudiantDAO {
                     System.out.print(res.getObject(i+1)+" | ");
                 }
                 System.out.println();
-            }
+            }Q
             */
         } catch (SQLException se) {
-            System.out.println("Erreur de selection" + se.getMessage());
+            System.out.println("Erreur de selection: " + se.getMessage());
         }
         return null;
     }
@@ -83,7 +83,7 @@ public class EtudiantImplementation implements EtudiantDAO {
                 }
                 return a;
             } catch (SQLException se) {
-                System.out.println("Erreur deleting" + se.getMessage());
+                System.out.println("Erreur deleting: " + se.getMessage());
 
             }
         }
@@ -92,8 +92,7 @@ public class EtudiantImplementation implements EtudiantDAO {
 
     @Override
     public int modifyEudiant(int cin, String nom, String prenom, double moyenne) {
-        String requete_update = "Update Etudiant set nom='"+nom+"',prenom='"+prenom+"',moyenne='"+Double.toString(moyenne)+"' WHERE cin='"+Integer.toString(cin)+"'";
-        System.out.println(requete_update);
+        String requete_update = "Update Etudiant set nom='"+nom+"',prenom='"+prenom+"',moyenne="+moyenne+" WHERE cin="+cin;
         Statement st = null;
         if (con != null) {
             try {
@@ -104,7 +103,7 @@ public class EtudiantImplementation implements EtudiantDAO {
                 }
                 return a;
             } catch (SQLException se) {
-                System.out.println("Erreur updating" + se.getMessage());
+                System.out.println("Erreur updating: " + se.getMessage());
 
             }
         }
