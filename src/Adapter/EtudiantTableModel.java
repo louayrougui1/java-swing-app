@@ -95,12 +95,12 @@ public class EtudiantTableModel extends AbstractTableModel {
             filteredData.add(newLigne);
             fireTableDataChanged();
         } else {
-            System.out.println("pas de modification");
+            System.out.println("ba7 modification");
         }
     }
     public void supprimerEtudiant(int cin) {
-        int x = implementation.deleteEudiant(cin);
-        if (x > 0) {
+        int a = implementation.deleteEudiant(cin);
+        if (a > 0) {
             for (int i = 0; i < data.size(); i++) {
                 if ((int) data.get(i)[0] == cin) {
                     data.remove(i);
@@ -113,13 +113,9 @@ public class EtudiantTableModel extends AbstractTableModel {
                     break;
                 }
             }
-            /*
-            data.removeIf(row -> (int) row[0] == cin);
-            filteredData.removeIf(row -> (int) row[0] == cin);
-            */
             fireTableDataChanged();
         } else {
-            System.out.println("pas de modification");
+            System.out.println("thamechi modification");
         }
     }
 
