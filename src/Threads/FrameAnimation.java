@@ -9,112 +9,110 @@ import java.awt.event.MouseEvent;
 import java.util.Date;
 
 public class FrameAnimation extends JFrame {
-    int x = 10;
-    int x_initiale = 10;
-    int x_finale = x_initiale;
-
-    int y = 220;
-    int y_initiale = 220;
-    int y_finale = y_initiale;
-
-    double a,b;
-    boolean isRunning = false;
     PanelAnimation pa;
-    JButton btnStart, btnStop;
+    JButton btn_start, btn_stop;
+    boolean is_running = false;
+    double a, b;
 
-    FrameAnimation() {
+    FrameAnimation(){
         setTitle("Animation");
-        setSize(900, 900);
+        setSize(900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        btnStop = new JButton("Stop");
-        btnStart = new JButton("Start");
+        btn_start = new JButton("Start");
+        btn_stop = new JButton("Stop");
 
         JPanel pn = new JPanel();
-        pn.setBackground(Color.red);
-        pn.add(btnStart);
-        pn.add(btnStop);
-        this.add(pn, BorderLayout.NORTH);
+        pn.setBackground(Color.gray);
+        pn.add(btn_start);
+        pn.add(btn_stop);
+        this.add(pn,BorderLayout.NORTH);
+
         pa = new PanelAnimation();
         this.add(pa);
 
         Animation anim = new Animation();
         anim.start();
-        btnStart.addActionListener(new ActionListener() {
+
+        btn_start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                isRunning = true;
+                is_running = true;
             }
+
         });
 
-        btnStop.addActionListener(new ActionListener() {
+        btn_stop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                isRunning = false;
+                is_running = false;
             }
         });
         pa.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                x_finale=e.getX();
-                y_finale=e.getY();
-                Graphics g=pa.getGraphics();
-                g.drawRect(x_finale,y_finale,150,150);
-                a=(y_finale-y_initiale)/(double)(x_finale-x_initiale);
-                b=y_finale-a*x_finale;
+                pa.x_final = e.getX();
+                pa.y_final = e.getY();
+
+                Graphics g = pa.getGraphics();
+                g.setColor(Color.white);
+                g.drawRect(pa.x_final, pa.y_final, 150, 150);
+
+                a = (pa.y_final - pa.y_init)/(double) (pa.x_final - pa.x_init);
+                b = pa.y_final - a * pa.x_final;
             }
         });
-
     }
-
-
-    class PanelAnimation extends JPanel {
-        PanelAnimation() {
-            this.setBackground(Color.cyan);
-
-        }
-
-        @Override
-        public void paint(Graphics g) {
-            super.paint(g);
-            g.setColor(Color.blue);
-            g.fillOval(x, y, 120, 120);
-            g.setColor(Color.white);
-            g.drawString(new Date().toLocaleString(), x, y);
-        }
-    }
-
     class Animation extends Thread {
+        int pas = 10;
         @Override
         public void run() {
-            int pas = 10;
-            while (true) {
-                System.out.println(isRunning);
-                while (isRunning && x < getWidth() - 120 &&   x > x_initiale) {
-                    x += pas;
-                    y=(int) (a*x+b);
+            while (true){
+                System.out.println(is_running);
+                while (is_running && pa.x < pa.x_final && pa.x >= pa.x_init ) {
+                    pa.x += pas;
+                    pa.y = (int)(a*pa.x + b);
                     pa.repaint();
                     try {
-                        Thread.sleep(50);
+                        Thread.sleep(20);
                     } catch (InterruptedException ex) {
                         throw new RuntimeException(ex);
                     }
                 }
-                if (x >=x_finale || x <= x_initiale) {
-                    pas = 10;
-                    x += pas;
-
-                }
-                if (x >= getWidth() - 120) {
-                    pas *= -1;
-                    x += pas;
+                if (pa.x >=pa.x_final|| pa.x < pa.x_init){
+                    pas*=-1;
+                    pa.x+=pas;
                 }
             }
         }
     }
+
+}
+
+class PanelAnimation extends JPanel{
+    int x = 10;
+    int x_init = 10;
+    int x_final = x_init;
+
+    int y = 220;
+    int y_init = 220;
+    int y_final = y_init;
+
+    PanelAnimation(){
+        this.setBackground(Color.CYAN);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.setColor(Color.blue);
+        g.fillOval(x,y,120,120);
+        g.setColor(Color.white);
+        g.drawString(new Date().toLocaleString(), x, y);
+    }
+
     public static void main(String[] args) {
-        FrameAnimation fa = new FrameAnimation();
-        fa.setVisible(true);
+        FrameAnimation f = new FrameAnimation();
+        f.setVisible(true);
     }
 }
