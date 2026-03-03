@@ -18,7 +18,7 @@ public class EtudiantImplementation implements EtudiantDAO {
                 st = con.createStatement();
                 int a = st.executeUpdate(requete_insertion);
                 if (a > 0) {
-                    System.out.println("Done, inserted !!!");
+                    System.out.println("ta777iite");
                 }
                 return a;
             } catch (SQLException se) {
@@ -36,40 +36,12 @@ public class EtudiantImplementation implements EtudiantDAO {
             st = con.createStatement();
             ResultSet res = st.executeQuery(requeteSelection);
             return res;
-            /*
-            ResultSetMetaData rsmd=res.getMetaData();
-            int nbcol = rsmd.getColumnCount();
-            while(res.next()){
-                for(int i=0;i<nbcol;i++){
-                    System.out.print(res.getObject(i+1)+" | ");
-                }
-                System.out.println();
-            }Q
-            */
+
         } catch (SQLException se) {
             System.out.println("Erreur de selection: " + se.getMessage());
         }
         return null;
     }
-    /*
-    * @Override
-    public List<Profile> selectEtudiant(String query) {
-        List<Profile> Profiles = new ArrayList<>();
-        //String query = "SELECT * FROM Profile";
-
-        try (PreparedStatement ps = con.prepareStatement(query);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                Profile p = new Profile(rs.getString("nom"), rs.getString("prenom"), rs.getString("Pseudo"));
-                Profiles.add(p);
-            }
-        } catch (SQLException se) {
-            System.out.println("Erreur de selection: " + se.getMessage());
-        }
-
-        return Profiles;
-    }*/
-
     @Override
     public int deleteEudiant(int cin) {
         String requete_delete = "DELETE FROM Etudiant WHERE cin="+cin;
@@ -79,7 +51,7 @@ public class EtudiantImplementation implements EtudiantDAO {
                 st = con.createStatement();
                 int a = st.executeUpdate(requete_delete);
                 if (a > 0) {
-                    System.out.println("Done, Deleted !!!");
+                    System.out.println("fasa5 3liya");
                 }
                 return a;
             } catch (SQLException se) {
@@ -99,7 +71,7 @@ public class EtudiantImplementation implements EtudiantDAO {
                 st = con.createStatement();
                 int a = st.executeUpdate(requete_update);
                 if (a > 0) {
-                    System.out.println("Done, updated !!!");
+                    System.out.println("badil badil fisa3");
                 }
                 return a;
             } catch (SQLException se) {
