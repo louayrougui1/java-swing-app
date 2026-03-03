@@ -15,7 +15,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 
-public class GestionEtudiant extends JFrame {
+public class GestionEtudiant extends JInternalFrame {
     JTable jt;
     JTextField tcin, tprenom, tnom, tmoy, tsearch;
     JButton btn_save;
@@ -25,7 +25,12 @@ public class GestionEtudiant extends JFrame {
     GestionEtudiant() {
         setTitle("Gestion Etudiants:");
         setSize(900, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        this.setClosable(true);
+        this.setMaximizable(true);
+        this.setIconifiable(true);
+        this.setResizable(true);
         //requete
         String requette = "Select * from etudiant";
         EtudiantImplementation implementation = new EtudiantImplementation();

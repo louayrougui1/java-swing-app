@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 
 public class Dashboard extends JFrame {
     JMenuBar menuBar;
-    JMenu menuTp1, menuTp2;
-    JMenuItem itemFlow, itemGrid, itemBorder, itemCv, itemGestionProfile;
+    JMenu menuTp1, menuTp2,menuTp3;
+    JMenuItem itemFlow, itemGrid, itemBorder, itemCv, itemGestionProfile,itemGestionEtudiant;
     JDesktopPane desktop;
 
     public Dashboard() {
@@ -24,16 +24,20 @@ public class Dashboard extends JFrame {
         itemBorder = new JMenuItem("Border");
         itemCv = new JMenuItem("Curriculumn Vitae");
         itemGestionProfile = new JMenuItem("Gestion Profile");
+        itemGestionEtudiant = new JMenuItem("Gestion Etudiant");
         menuTp1 = new JMenu("Tp1");
         menuTp2 = new JMenu("Tp2");
+        menuTp3 = new JMenu("Tp3");
         menuTp1.add(itemFlow);
         menuTp1.add(itemGrid);
         menuTp1.add(itemBorder);
         menuTp2.add(itemCv);
         menuTp2.add(itemGestionProfile);
+        menuTp3.add(itemGestionEtudiant);
         menuBar = new JMenuBar();
         menuBar.add(menuTp1);
         menuBar.add(menuTp2);
+        menuBar.add(menuTp3);
         this.setJMenuBar(menuBar);
         //ajout events
         itemFlow.addActionListener(new EcouteurMenu());
@@ -41,6 +45,7 @@ public class Dashboard extends JFrame {
         itemGrid.addActionListener(new EcouteurMenu());
         itemCv.addActionListener(new EcouteurMenu());
         itemGestionProfile.addActionListener(new EcouteurMenu());
+        itemGestionEtudiant.addActionListener(new EcouteurMenu());
 
         desktop= new JDesktopPane();
         this.add(desktop);
@@ -75,6 +80,11 @@ public class Dashboard extends JFrame {
                 GestionProfile gp = new GestionProfile();
                 gp.setVisible(true);
                 desktop.add(gp);
+
+            }if(e.getSource()==itemGestionEtudiant){
+                GestionEtudiant ge = new GestionEtudiant();
+                ge.setVisible(true);
+                desktop.add(ge);
 
             }
         }
