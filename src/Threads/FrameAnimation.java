@@ -14,7 +14,7 @@ public class FrameAnimation extends JFrame {
     boolean is_running = false;
     double a, b;
 
-    FrameAnimation(){
+    public FrameAnimation(){
         setTitle("Animation");
         setSize(900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

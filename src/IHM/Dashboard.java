@@ -1,5 +1,8 @@
 package IHM;
 
+import Threads.DateAnimation;
+import Threads.FrameAnimation;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 public class Dashboard extends JFrame {
+    static DateAnimation animation;
     JMenuBar menuBar;
     JMenu menuTp1, menuTp2,menuTp3;
     JMenuItem itemFlow, itemGrid, itemBorder, itemCv, itemGestionProfile,itemGestionEtudiant;
@@ -15,7 +19,7 @@ public class Dashboard extends JFrame {
     public Dashboard() {
         //creation du dashboard
         this.setTitle("Dashboard");
-        this.setSize(1000, 1000);
+        this.setSize(1050, 800);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //creation des menu
@@ -49,13 +53,17 @@ public class Dashboard extends JFrame {
 
         desktop= new JDesktopPane();
         this.add(desktop);
+
         }
 
 
     class EcouteurMenu implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            animation.setRunning(false);
+            desktop.removeAll();
+            //desktop.revalidate();
+            desktop.repaint();
             if(e.getSource()==itemFlow){
                 FrameFlow fl = new FrameFlow();
                 fl.setVisible(true);
@@ -87,6 +95,7 @@ public class Dashboard extends JFrame {
                 desktop.add(ge);
 
             }
+
         }
     }
     /*lb.addMouseListener(new MouseListener(){
@@ -107,5 +116,11 @@ public class Dashboard extends JFrame {
     public static void main(String[] args) {
         Dashboard dsh = new Dashboard();
         dsh.setVisible(true);
+        //added animation after visible
+        animation = new DateAnimation();
+        animation.setBounds(0, 0, dsh.desktop.getWidth(), dsh.desktop.getHeight());
+        dsh.desktop.add(animation);
+        //dsh.desktop.revalidate();
+        dsh.desktop.repaint();
     }
 }
