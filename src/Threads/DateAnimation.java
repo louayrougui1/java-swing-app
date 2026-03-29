@@ -4,16 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Date;
 
-public class DateAnimation extends JPanel {
+public class DateAnimation extends JInternalFrame  {
     boolean isRunning = true;
 
     PaintPanel pp;
-
+    static float text_size,text_width;
     public DateAnimation() {
+        super("",false,false,false,false);
+        this.setBorder(null);
+        this.setVisible(true);
         pp = new PaintPanel();
         pp.setPreferredSize(new Dimension(900, 600)); // fill the window
-        this.setLayout(new BorderLayout()); // optional but recommended
-        this.add(pp, BorderLayout.CENTER);
+        this.setLayout(new BorderLayout());
+        this.add(pp);
         Animation anim = new Animation();
         anim.start();
 

@@ -21,8 +21,8 @@ public class Dashboard extends JFrame {
         this.setTitle("Dashboard");
         this.setSize(1050, 800);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
 
-        //creation des menu
         itemFlow = new JMenuItem("Flow");
         itemGrid = new JMenuItem("Grid");
         itemBorder = new JMenuItem("Border");
@@ -52,9 +52,16 @@ public class Dashboard extends JFrame {
         itemGestionEtudiant.addActionListener(new EcouteurMenu());
 
         desktop= new JDesktopPane();
-        this.add(desktop);
+        animation = new DateAnimation();
+        Dimension size = this.getContentPane().getSize();
+        animation.setBounds(0, 0, size.width, size.height);
+//        System.out.println("Width: "+desktop.getWidth()+"\nHeight: "+desktop.getHeight());
+        desktop.add(animation);
 
+        this.add(desktop);
+        desktop.repaint();
         }
+
 
 
     class EcouteurMenu implements ActionListener {
@@ -115,12 +122,6 @@ public class Dashboard extends JFrame {
     })*/
     public static void main(String[] args) {
         Dashboard dsh = new Dashboard();
-        dsh.setVisible(true);
-        //added animation after visible
-        animation = new DateAnimation();
-        animation.setBounds(0, 0, dsh.desktop.getWidth(), dsh.desktop.getHeight());
-        dsh.desktop.add(animation);
-        //dsh.desktop.revalidate();
-        dsh.desktop.repaint();
+
     }
 }
