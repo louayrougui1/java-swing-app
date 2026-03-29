@@ -8,11 +8,13 @@ public class DateAnimation extends JInternalFrame  {
     boolean isRunning = true;
 
     PaintPanel pp;
-    static float text_size,text_width;
-    public DateAnimation() {
+    Double maxX,maxY;
+    public DateAnimation(Double maxX,Double maxY) {
         super("",false,false,false,false);
         this.setBorder(null);
         this.setVisible(true);
+        this.maxY=maxY;
+        this.maxX=maxX;
         pp = new PaintPanel();
         pp.setPreferredSize(new Dimension(900, 600)); // fill the window
         this.setLayout(new BorderLayout());
@@ -29,16 +31,16 @@ public class DateAnimation extends JInternalFrame  {
     class Animation extends Thread {
         @Override
         public void run() {
+            maxY -= 43.2;
+            maxX -= 36*0.6*28;
             while (isRunning) {
-                String date = new Date().toString();
-                int maxX = getWidth() - 300; // approximate text width
-                int maxY = getHeight() - 300; // approximate text height
-                if (maxX > 0 && maxY > 0) {
-                    pp.x = (int) (Math.random() * maxX);
+
+
+                    pp.x = (int) (Math.random()*maxX);
                     pp.y = (int) (Math.random() * maxY);
                     pp.repaint();
 
-                }
+
                 try {
                     Thread.sleep(1000); // adjust speed
                 } catch (InterruptedException e) {
@@ -54,15 +56,16 @@ class PaintPanel extends JPanel {
     int x, y;
 
     PaintPanel() {
-        this.setBackground(Color.darkGray);
+        this.setBackground(Color.BLUE);
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         g.setColor(Color.white);
-        g.setFont(new Font("Arial", Font.BOLD, 24));
-        g.drawString(new Date().toLocaleString(), x, y);
+        g.setFont(new Font("sans-serif", Font.BOLD, 36));
+        System.out.println(new Date().toString().length());
+        g.drawString(new Date().toString(), x, y);
 
     }
 }

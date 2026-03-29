@@ -52,8 +52,9 @@ public class Dashboard extends JFrame {
         itemGestionEtudiant.addActionListener(new EcouteurMenu());
 
         desktop= new JDesktopPane();
-        animation = new DateAnimation();
         Dimension size = this.getContentPane().getSize();
+        animation = new DateAnimation(Double.valueOf(size.width),Double.valueOf(size.height));
+
         animation.setBounds(0, 0, size.width, size.height);
 //        System.out.println("Width: "+desktop.getWidth()+"\nHeight: "+desktop.getHeight());
         desktop.add(animation);
