@@ -12,8 +12,8 @@ import java.awt.event.MouseListener;
 public class Dashboard extends JFrame {
     static DateAnimation animation;
     JMenuBar menuBar;
-    JMenu menuTp1, menuTp2,menuTp3;
-    JMenuItem itemFlow, itemGrid, itemBorder, itemCv, itemGestionProfile,itemGestionEtudiant;
+    JMenu menuTp1, menuTp2, menuTp3;
+    JMenuItem itemFlow, itemGrid, itemBorder, itemCv, itemGestionProfile, itemGestionEtudiant;
     JDesktopPane desktop;
 
     public Dashboard() {
@@ -51,53 +51,11 @@ public class Dashboard extends JFrame {
         itemGestionProfile.addActionListener(new EcouteurMenu());
         itemGestionEtudiant.addActionListener(new EcouteurMenu());
 
-        desktop= new JDesktopPane();
+        desktop = new JDesktopPane();
         this.add(desktop);
 
-        }
-
-
-    class EcouteurMenu implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            animation.setRunning(false);
-            desktop.removeAll();
-            //desktop.revalidate();
-            desktop.repaint();
-            if(e.getSource()==itemFlow){
-                FrameFlow fl = new FrameFlow();
-                fl.setVisible(true);
-                desktop.add(fl);
-            }if(e.getSource()==itemGrid){
-                Grid gl = new Grid();
-                gl.setVisible(true);
-                desktop.add(gl);
-
-
-            }if(e.getSource()==itemBorder){
-                Border bl = new Border();
-                bl.setVisible(true);
-                desktop.add(bl);
-
-            }if(e.getSource()==itemCv){
-                CurriculumVitae cv = new CurriculumVitae();
-                cv.setVisible(true);
-                desktop.add(cv);
-
-            }if(e.getSource()==itemGestionProfile){
-                GestionProfile gp = new GestionProfile();
-                gp.setVisible(true);
-                desktop.add(gp);
-
-            }if(e.getSource()==itemGestionEtudiant){
-                GestionEtudiant ge = new GestionEtudiant();
-                ge.setVisible(true);
-                desktop.add(ge);
-
-            }
-
-        }
     }
+
     /*lb.addMouseListener(new MouseListener(){
         public void mouseClicked(mouseEvent e){
             ...
@@ -122,5 +80,52 @@ public class Dashboard extends JFrame {
         dsh.desktop.add(animation);
         //dsh.desktop.revalidate();
         dsh.desktop.repaint();
+    }
+
+    class EcouteurMenu implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            animation.setRunning(false);
+            desktop.removeAll();
+            //desktop.revalidate();
+            desktop.repaint();
+            if (e.getSource() == itemFlow) {
+                FrameFlow fl = new FrameFlow();
+                fl.setVisible(true);
+                desktop.add(fl);
+            }
+            if (e.getSource() == itemGrid) {
+                Grid gl = new Grid();
+                gl.setVisible(true);
+                desktop.add(gl);
+
+
+            }
+            if (e.getSource() == itemBorder) {
+                Border bl = new Border();
+                bl.setVisible(true);
+                desktop.add(bl);
+
+            }
+            if (e.getSource() == itemCv) {
+                CurriculumVitae cv = new CurriculumVitae();
+                cv.setVisible(true);
+                desktop.add(cv);
+
+            }
+            if (e.getSource() == itemGestionProfile) {
+                GestionProfile gp = new GestionProfile();
+                gp.setVisible(true);
+                desktop.add(gp);
+
+            }
+            if (e.getSource() == itemGestionEtudiant) {
+                GestionEtudiant ge = new GestionEtudiant();
+                ge.setVisible(true);
+                desktop.add(ge);
+
+            }
+
+        }
     }
 }
